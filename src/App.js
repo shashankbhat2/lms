@@ -1,25 +1,47 @@
-import logo from './logo.svg';
+import {Redirect, Route, Switch } from 'react-router-dom';
+import React from 'react'
 import './App.css';
+import Login from './Auth/Login';
+import Signup from './Auth/Signup';
+import AdminDashboard from './Dashboards/admin/AdminDashboard'
+import StudentDashboard from './Dashboards/student/StudentDashboard'
+import TeacherDashboard from './Dashboards/teacher/TeacherDashboard'
+import {connect} from 'react-redux';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+class App extends React.Component{
+  render(){
+  const {profile, auth} = this.props;
+  return(
+        <div>
+          <Switch>
+          <Route path="/signup" exact component={Signup}></Route>
+          <Route path="/login" exact component={Login}></Route>
+          {
+            auth && !auth.uid && <Redirect to="/login"></Redirect>
+          }
+          {
+            profile.userType === "Admin" && <AdminDashboard></AdminDashboard>
+          }
+          {
+            profile.userType === "Student" && <StudentDashboard></StudentDashboard>
+          }
+          {
+            profile.userType === "Teacher" && <TeacherDashboard></TeacherDashboard>
+          }
+          </Switch>
+        </div>
+      )
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+      profile: state.firebase.profile,
+      auth: state.firebase.auth
+  }
+}
+
+
+export default connect(mapStateToProps)(App);

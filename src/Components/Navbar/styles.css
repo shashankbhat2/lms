@@ -1,0 +1,14 @@
+.profile-dropdown{
+    background-color: transparent;
+    margin: 0 !important;
+    border: none;
+}
+.profile-dropdown:active{
+    background-color: transparent !important;
+    outline: none !important;
+}
+
+.profile-dropdown:focus{
+    background-color: transparent !important;
+    outline: none !important;
+}
