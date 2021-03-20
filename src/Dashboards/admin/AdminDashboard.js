@@ -1,55 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router';
-import { Card, Container, Row } from 'reactstrap';
 import Footer from '../../Components/Footer/Footer';
-import CustomNavbar from '../../Components/Navbar/Navbar';
-import './Dashboard.css'
-import DoubtContainer from './pages/Doubts';
-
-const links = [
-    {
-        "link": "Students",
-        "url": "/students"
-    },
-    {
-        "link": "Courses",
-        "url": "/courses"
-    },
-    {
-        "link": "Assigments",
-        "url": "/assignments"
-    },
-    {
-        "link": "Assigment Submissions",
-        "url": "/assignmentsubmissions"
-    },
-    {
-        "link": "Student Doubts",
-        "url": "/doubts"
-    },
-]
+import Overview from './pages/Overview'
+import StudentTable from './pages/Students'
+import Student from './pages/Student';
+import CustomAlert from '../../Components/Alert';
 
 
 
 
-const AdminDashboard = ({profile}) => {
+const AdminDashboard = ({auth, authSuccess}) => {
+    if(!auth.uid) return <Redirect to="/login"></Redirect>   
+
     return(
         <div>
-            <CustomNavbar links={links} currentUser={profile}></CustomNavbar>
-            <Container className="mt-4 mb-4">
-                <Row>
-                    <Card className="welcome-card">
-                        <h2>Welcome</h2>
-                        <h4 className="username">{profile.name}</h4>
-                    </Card>
-                </Row>
-                <Row>
-                    <Switch>
-                        <Route exact path="/doubts" component={DoubtContainer}></Route>
-                    </Switch>
-                </Row>
-            </Container>
+            {authSuccess && <CustomAlert alert={authSuccess}></CustomAlert>}
+            <Switch>
+                    <Route exact path="/" component={Overview}></Route>
+                    <Route exact path="/students" component={StudentTable}></Route>
+                    <Route exact path="/students/:student" component={Student}></Route>
+            </Switch>
             <Footer></Footer>
         </div>
     )
@@ -57,8 +28,9 @@ const AdminDashboard = ({profile}) => {
 
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
+        auth: state.firebase.auth,
+        authSuccess: state.auth.authSuccess,
         profile: state.firebase.profile, 
     }
 }

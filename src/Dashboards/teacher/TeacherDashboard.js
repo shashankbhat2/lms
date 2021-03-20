@@ -2,39 +2,18 @@ import React from 'react'
 import { Redirect, Route, Switch } from 'react-router';
 import { Card, Container, Row } from 'reactstrap';
 import Footer from '../../Components/Footer/Footer';
-import CustomNavbar from '../../Components/Navbar/Navbar';
 import { connect } from 'react-redux';
-
-const links = [
-    {
-        "link": "Students",
-        "url": "/students"
-    },
-    {
-        "link": "Courses",
-        "url": "/courses"
-    },
-    {
-        "link": "Assigments",
-        "url": "/assignments"
-    },
-    {
-        "link": "Assigment Submissions",
-        "url": "/assignmentsubmissions"
-    },
-    {
-        "link": "Student Doubts",
-        "url": "/doubts"
-    },
-]
+import ErrorPage from '../../Errorpage';
 
 
 
 
-const TeacherDashboard = ({profile}) => {
+const TeacherDashboard = ({profile, auth}) => {
+    if(!auth.uid) return <Redirect to="/login"></Redirect>   
+    if(profile.userType !== 'Teacher') return (<ErrorPage></ErrorPage>)
+
     return(
         <div>
-            <CustomNavbar links={links} currentUser={profile}></CustomNavbar>
             <Container className="mt-4 mb-4">
                 <Row>
                     <Card className="welcome-card">
@@ -52,8 +31,8 @@ const TeacherDashboard = ({profile}) => {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
+        auth: state.firebase.auth,
         profile: state.firebase.profile, 
     }
 }

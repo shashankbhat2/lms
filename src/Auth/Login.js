@@ -6,6 +6,8 @@ import {ReactComponent as Logo} from '../Assets/Logo.svg'
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux';
 import {signIn} from '../Store/actions/authActions';
+import Footer from '../Components/Footer/Footer'
+import CustomAlert from '../Components/Alert'
 
 class Login extends React.Component{
     constructor(props){
@@ -33,7 +35,7 @@ class Login extends React.Component{
     handleSubmit = (e) => {
         e.preventDefault();
         if(this.validate()){
-            this.props.signIn(this.state.input)
+            this.props.signIn(this.state.input);
         }
     }
 
@@ -63,7 +65,7 @@ class Login extends React.Component{
 
 
     render(){
-        const {auth} = this.props;
+        const {auth, authError} = this.props;
         if(auth.uid) return (<Redirect to="/"></Redirect>)
 
     return(
@@ -75,7 +77,7 @@ class Login extends React.Component{
                        </div>
                 </div>
             </Col>
-            <Col>
+            <Col md="8">
                    <Form onSubmit={this.handleSubmit}>
                    <Container className="signup-container">
                    <h1 className="heading mt-5 mb-5">Login</h1>
@@ -98,9 +100,11 @@ class Login extends React.Component{
                    </Col>
                    <Button  color="primary" className="login-button" type="submit">Submit</Button>
                    <p className="login-helper">Dont have an account? <Link to="/signup">Signup</Link></p>
+                   {authError && <CustomAlert color="danger" alert={authError} authError></CustomAlert>}
                    </Container> 
                    </Form> 
             </Col>
+            <Footer></Footer>
         </Row>
      )
     }
@@ -108,7 +112,8 @@ class Login extends React.Component{
 
 const mapStateToProps = (state) =>{
     return{
-        auth : state.firebase.auth
+        auth : state.firebase.auth,
+        authError: state.auth.authError,
     }
 }
 

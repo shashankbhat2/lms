@@ -24,14 +24,14 @@ const CustomNavbar = ({links, currentUser, signOut}) => {
 
     return(
         <div>
-        <Navbar color="dark" dark expand="md">
+        <Navbar color="dark" dark expand="md" className="navbar">
           <NavbarBrand href="/">Acadonline</NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
               {links.map((link)=> (
-              <NavItem className="navitem mr-3">
-                <NavLink href={link.url}>{link.link}</NavLink>
+              <NavItem className="navitem mr-3" key={link.url}>
+                <NavLink href={link.url}>{link.route}</NavLink>
               </NavItem>
               ))}
          
@@ -40,16 +40,15 @@ const CustomNavbar = ({links, currentUser, signOut}) => {
                 currentUser ? 
                 <UncontrolledDropdown className="mr-5 profile-menu">
                 <DropdownToggle className="profile-dropdown">
-                  {currentUser.name}
+                  {currentUser.name ? currentUser.name : ''} 
                 </DropdownToggle>
                 <DropdownMenu className="mt-2">
-                  <DropdownItem>Profile</DropdownItem>
-                  <DropdownItem tag={Link} to="/" onClick={signOut}>Logout</DropdownItem>
+                  <DropdownItem tag={Link} to="/login" onClick={signOut}>Logout</DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>          
               :
-                undefined
-              }
+                ''
+            }
           </Collapse>
         </Navbar>
       </div> 

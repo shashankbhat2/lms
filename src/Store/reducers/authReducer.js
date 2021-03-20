@@ -1,36 +1,33 @@
 const initState = {
-    authError: null
+    authError: null,
+    authSuccess: null
   }
   
   const authReducer = (state = initState, action) => {
     switch(action.type){
       case 'LOGIN_ERROR':
-        console.log('login error');
         return {
           ...state,
-          authError: 'Login failed'
+          authError: action.err.message === "The password is invalid or the user does not have a password." ? "Invalid Password" : 'Try Again Later'
         }
-  
       case 'LOGIN_SUCCESS':
-        console.log('login success');
         return {
           ...state,
-          authError: null
+          authError: null,
+          authSuccess: 'Login Success'
         }
   
       case 'SIGNOUT_SUCCESS':
-        console.log('signout success');
         return state;
-  
+        
       case 'SIGNUP_SUCCESS':
-        console.log('signup success')
         return {
           ...state,
-          authError: null
+          authError: null,
+          authSuccess: 'Signup Success'
         }
   
       case 'SIGNUP_ERROR':
-        console.log('signup error')
         return {
           ...state,
           authError: action.err.message

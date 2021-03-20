@@ -1,4 +1,7 @@
+import { uid } from 'uid';
+
 export const signIn = (credentials) => {
+
     return (dispatch, getState, {getFirebase}) => {
       const firebase = getFirebase();
       
@@ -24,8 +27,8 @@ export const signIn = (credentials) => {
     }
   }
   
-  export const signUp = (newUser) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
+export const signUp = (newUser) => {
+  return (dispatch, getState, {getFirebase, getFirestore}) => {
       const firebase = getFirebase();
       const firestore = getFirestore();
   
@@ -35,9 +38,12 @@ export const signIn = (credentials) => {
       ).then(resp => {
         return firestore.collection('users').doc(resp.user.uid).set({
           name: newUser.name,
-          SRN: newUser.srn,
+          SRN: `acad${newUser.branch}${uid()}`,
           Branch: newUser.branch,
           userType: newUser.type, 
+          phone: newUser.phone,
+          email: newUser.email,
+          semester: newUser.semester
         });
       }).then(() => {
         dispatch({ type: 'SIGNUP_SUCCESS' });
