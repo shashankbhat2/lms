@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'video-react/dist/video-react.css';
 import { BrowserRouter } from 'react-router-dom';
 import { reduxFirestore, getFirestore,createFirestoreInstance} from 'redux-firestore';
 import {ReactReduxFirebaseProvider,getFirebase} from 'react-redux-firebase';

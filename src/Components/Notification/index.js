@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
-import './styles.css'
 
 const Notification = ({notifications, profile}) => {
 

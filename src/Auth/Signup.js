@@ -31,8 +31,8 @@ class Signup extends React.Component{
  handleChange  = (e) => {
      const input = this.state.input
      const errors = this.state.errors
-     input[e.target.id] = e.target.value.trim();
-     errors[e.target.id] = "";
+     input[e.target.name] = e.target.value.trim();
+     errors[e.target.name] = "";
      this.setState({input})
      this.setState({errors})
  }
@@ -135,23 +135,10 @@ class Signup extends React.Component{
                     <Col md='5' className="mt-3">
                         <FormGroup>
                         <Label for="exampleSelect">Select Your Branch</Label>
-                                <Input type="select" name="select" id="branch" onChange={this.handleChange}>
+                                <Input type="select" name="branch" id="branch" onChange={this.handleChange}>
                                 {branches && branches.map(branch => (
                                     <>
-                                        <option key={branch} value={branch.name}>{branch.name}</option>
-                                    </>
-                                ))
-                                }
-                                </Input>
-                        </FormGroup>
-                    </Col>
-                    <Col md='5' className="mt-3">
-                        <FormGroup>
-                        <Label for="exampleSelect">Select Your Branch</Label>
-                                <Input type="select" name="select" id="semester" onChange={this.handleChange}>
-                                {semesters && semesters[0].sems.map(sem => (
-                                    <>
-                                        <option key={sem.id} value={sem}>{sem}</option>
+                                        <option key={branch.name} value={branch.name}>{branch.name}</option>
                                     </>
                                 ))
                                 }
@@ -162,7 +149,7 @@ class Signup extends React.Component{
                         <Row>
                         <Col>
                             <FormGroup check>
-                            <Input id="radio1-option1" type="radio" name="radio1" value="Student" id="type" onChange={this.handleChange}/>
+                            <Input id="radio1-option1" type="radio" name="type" value="Student" id="student" onChange={this.handleChange}/>
                             <Label check for="radio1-option1">
                                 Student
                             </Label>
@@ -170,7 +157,7 @@ class Signup extends React.Component{
                         </Col>
                         <Col>
                             <FormGroup check>
-                            <Input type="radio" name="radio1" id="radio1-option2" value="Teacher" id="type" onChange={this.handleChange}/>
+                            <Input type="radio" name="type" id="radio1-option2" value="Teacher" id="teacher" onChange={this.handleChange}/>
                             <Label check for="radio1-option2">
                                 Teacher
                             </Label>
@@ -178,6 +165,19 @@ class Signup extends React.Component{
                         </Col>
                         </Row>
                     </Col>
+                    {this.state.input.type === "Teacher" ? '' : <Col md='5' className="mt-3">
+                        <FormGroup>
+                        <Label for="exampleSelect">Select Your Semester</Label>
+                                <Input type="select" name="select" id="semester" onChange={this.handleChange}>
+                                {semesters && semesters[0].sems.map(sem => (
+                                    <>
+                                        <option key={sem} value={sem}>{sem}</option>
+                                    </>
+                                ))
+                                }
+                                </Input>
+                        </FormGroup>
+                    </Col>}
                 </Row>
                 <Button color="primary" className="signup-button" type="submit">Submit</Button>
                 <p className="login-helper">Have an account already? <Link to="/login">Login</Link></p>

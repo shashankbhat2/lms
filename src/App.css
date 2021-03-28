@@ -64,8 +64,8 @@ body{
 .basic-info{
   padding: 20px;
   background: #FFFFFF;
-  box-shadow: -1px 10px 19px rgba(3, 0, 159, 0.1);
   border: none !important;
+  box-shadow: -1px 10px 19px rgba(3, 0, 159, 0.1);
 }
 
 .basic-info > h4{
@@ -114,6 +114,7 @@ body{
   padding: 5px;
   border-radius: 50px;
   border: none;
+  background: transparent;
   z-index: 1;
   position: relative;
   top: 100px;
@@ -139,15 +140,205 @@ body{
   padding: 10px;
   cursor: pointer;
 }
-.suspend{
-  background: #EB5757 !important;
+
+.button{
   border: none !important;
   font-weight: 550 !important;
   text-transform: uppercase;
-  margin: 20px 0px;
-  font-size: 20px !important;
+  width: 80%;
+  margin-top: auto;
+  font-size: 14px !important;
+}
+
+.card-button{
+  border: none !important;
+  font-weight: 550 !important;
+  text-transform: uppercase;
+  width: auto;
+  margin-top: 10px;
+  font-size: 14px !important;
+}
+
+.course-card{
+  margin: 5px;
+  border: none !important;
+  box-shadow: -2px 5px 18px rgba(3, 0, 159, 0.15);
+  transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 2s;
+}
+
+
+.course-card:hover{
+  transform: scale(1.05);
+}
+
+
+.navy{
+  background-color: #0021CA !important;
+}
+
+.subtitle{
+  color: black !important;
+  font-weight: 500;
+}
+
+
+.profile-menu{
+  margin-right: 10px !important;
+}
+
+.profile-dropdown{
+  color: white !important;
+  font-family: 'Source Sans Pro';
+  font-weight: 550 !important;
+  background-color: transparent !important;
+  margin: 0 !important;
+  border: 1px solid !important;
+}
+.profile-dropdown:active{
+  background-color: transparent !important;
+  outline: none !important;
+}
+
+.profile-dropdown:focus{
+  background-color: transparent !important;
+  outline: none !important;
+}
+
+.navbar{
+  background: #AFD1FF !important;
+}
+
+.slider-img{
+  width:100%;
+  height:400px;
+}
+.carousel{
+  width:100%;
+}
+
+@media (max-width: 767px) {    
+  .slider-img{
+      width:100%;
+      height:200px;
+  }
+}
+
+.question{
+  color: navy;
+  font-size: 18px;
+  font-family: 'Source Sans Pro', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.title{
+  font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 550;
+  color: darkblue;
+}
+.user{
+  font-size: 16px;
+  font-weight:500;
+}
+
+.q-card{
+  box-shadow: 1px 4px 12px rgba(3, 0, 159, 0.1);
+  border: none !important;
+}
+
+.footer{
+  text-align: center;
+  font-size: 16px; 
+  font-family: 'Source Sans Pro';
+  margin: auto;
+  background-color: #AFD1FF;
+  color: navy; 
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
+.notif-heading{
+  background: #03009F !important;
+  font-family: 'Source Sans Pro';
+  font-weight: 550;
+  text-align: center;
+  color: white;
+  border: none;
+}
+
+.add-notif{
+  width: 100%;
+  font-family: 'Source Sans Pro';
+  text-transform: uppercase;
+  font-weight: 550 !important;
+}
+
+.notifications{
+  border: none;
+  box-shadow: 0px 4px 4px rgba(3, 0, 159, 0.2);
+}
+.link{
+  color: white !important;
+  text-decoration: none !important;
+}
+.course-title{
+  color: #4F4F4F;
+}
+
+.c-title{
+  color: black;
+  font-weight: 550;
+}
+
+.video-title{
+  font-size: 20px;
+  font-weight: 550;
+}
+
+.video-card{
+  margin: 0px 5px;
+  padding: 10px;
+}
+
+.play-button{
+  background: navy !important;
+}
+.view-button{
+  background:royalblue !important;
+}
+
+.card-link{
+  text-decoration: none;
+  color: black;
+}
+
+.a-card{
+  margin: 5px;
+  border: none !important;
+  box-shadow: -2px 5px 18px rgba(3, 0, 159, 0.15);
+}
+
+.a-title{
+  color:black;
+  font-size: 20px;
+  font-weight: 550;
 }
 
 .edit{
+  background:crimson !important;
+}
+
+.a-btn{
+  border: none !important;
+}
+
+.view{
   background: #03009F !important;
+}
+
+.a-subtitle{
+  font-size: 16px !important;
+  margin: 10px 0px;
+  font-weight: 550;
+  color: darkslategrey !important;
 }

@@ -12,19 +12,17 @@ import {setStudentSuspended} from '../../Store/actions/studentActions'
 
 
 
-const CustomTable = ({students, sortedByBranch, branch, setStudentSuspended}) => {
-
+const StudentTable = ({students, sortedByBranch, branch, setStudentSuspended}) => {
     const branchWise = branch === 'All' ? students : sortedByBranch; 
-    const studentData = branchWise;
+    let studentData = branchWise;
 
-   
-    
 
     const handleSuspend = (student) => {
         setStudentSuspended(student)
     }
 
     return(
+        <React.Fragment>
         <Table responsive bordered className="mt-4 mb-4">
         <thead>
             <tr>
@@ -53,10 +51,10 @@ const CustomTable = ({students, sortedByBranch, branch, setStudentSuspended}) =>
             <Button outline color='danger' className="suspend-button" onClick={() => handleSuspend(student)}>{student.suspended ? 'Unsuspend':'Suspend'}</Button>
             </td>
             </tr>   
-        ))
-        }
+        ))}
         </tbody>
         </Table>
+        </React.Fragment>
     )
 }
 
@@ -66,7 +64,6 @@ const mapStateToProps = (state) => {
     return{
         students: state.firestore.ordered.users || [],
         sortedByBranch: state.firestore.ordered.sortedByBranch || [],
-        sortedBySem: state.firestore.ordered.sortedBySem || []
     }   
 }
 
@@ -93,9 +90,4 @@ export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreCo
         where: [['userType', '==', 'Student'], ['Branch','==',`${props.branch}`]],
         storeAs: 'sortedByBranch'
     },
-    {
-        collection: 'users',
-        where: [['userType', '==', 'Student'], ['Semester','==',`${props.sem}`]],
-        storeAs: 'sortedBySem'
-    }
-]))(CustomTable);
+]))(StudentTable);

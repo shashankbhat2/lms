@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { firestoreConnect } from 'react-redux-firebase'
-import { Container, Input,Row, Col} from 'reactstrap'
+import { Container, Input,Row, Col, Button} from 'reactstrap'
 import { compose } from 'redux'
 import {connect} from 'react-redux';
-import StudentTable from '../../../Components/Table/StudentTable'
+import TeacherTable from '../../../Components/Table/TeacherTable'
 
 
 
-const Students = ({branches}) => {
+const Teachers = ({branches}) => {
     const [selectedBranch, setSelectedBranch] = useState('All');
 
     const handleBranch = (e) => {
@@ -17,7 +17,7 @@ const Students = ({branches}) => {
 
     return(
         <Container className="mt-4 mb-4">
-            <h1 className="table-title">Students</h1>
+            <h1 className="table-title">Teachers</h1>
             <Row>
                 <Col md='2'>
                     <h3 className="branch">Branch: <span>{selectedBranch}</span></h3>
@@ -28,7 +28,7 @@ const Students = ({branches}) => {
                         </Col>
                     <Col md="auto">
                         <Input type="select" className="selector" name="select" id="branch" onChange={handleBranch}>
-                            <option value='All' defaultValue>All Students</option>
+                            <option value='All' defaultValue>All Teachers</option>
                             {branches && branches.map(branch => (
                             <option key={branch.id} value={branch.name}>{branch.name}</option>
                             ))}           
@@ -36,7 +36,7 @@ const Students = ({branches}) => {
                     </Col>
                 </Row>
             </Row>
-            <StudentTable branch={selectedBranch}></StudentTable>
+            <TeacherTable branch={selectedBranch}></TeacherTable>
         </Container>        
     )
 }
@@ -54,6 +54,5 @@ export default compose(connect(mapStateToProps), firestoreConnect([
     {
         collection: 'branches'
     },   
-]))(Students);
-
+]))(Teachers);
 

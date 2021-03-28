@@ -12,7 +12,6 @@ import {
     DropdownMenu, 
     DropdownItem  
 } from 'reactstrap';
-import './styles.css'
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {signOut} from '../../Store/actions/authActions';

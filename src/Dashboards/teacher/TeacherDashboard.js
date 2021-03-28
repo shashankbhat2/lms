@@ -1,32 +1,33 @@
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router';
-import { Card, Container, Row } from 'reactstrap';
 import Footer from '../../Components/Footer/Footer';
 import { connect } from 'react-redux';
 import ErrorPage from '../../Errorpage';
+import TeacherOverview from './pages/TeacherOverview';
+import CustomAlert from '../../Components/Alert';
+import Courses from '../admin/pages/Courses';
+import Course from '../admin/pages/Course';
+import MyAssignments from './pages/MyAssignments';
 
 
 
 
-const TeacherDashboard = ({profile, auth}) => {
+const TeacherDashboard = ({profile, auth, authSuccess}) => {
     if(!auth.uid) return <Redirect to="/login"></Redirect>   
     if(profile.userType !== 'Teacher') return (<ErrorPage></ErrorPage>)
 
     return(
         <div>
-            <Container className="mt-4 mb-4">
-                <Row>
-                    <Card className="welcome-card">
-                        <h2>Welcome</h2>
-                        <h4 className="username">{profile.name}</h4>
-                    </Card>
-                </Row>
-                <Row>
-                    <div>Hello</div>
-                </Row>
-            </Container>
+            {authSuccess && <CustomAlert alert={authSuccess}></CustomAlert>}
+            <Switch>
+                    <Route exact path="/" component={TeacherOverview}></Route>
+                    <Route exact path="/courses" component={Courses}></Route>
+                    <Route exact path="/courses/:course" component={Course}></Route>
+                    <Route exact path="/myassignments" component={MyAssignments}></Route>
+            </Switch>
             <Footer></Footer>
         </div>
+
     )
 }
 
@@ -34,6 +35,7 @@ const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
         profile: state.firebase.profile, 
+        authSuccess: state.auth.authSuccess,
     }
 }
 
