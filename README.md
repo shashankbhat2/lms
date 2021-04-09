@@ -1,4 +1,4 @@
-# LMS APP 
+# Learning Management System - Project 
 
 ### Tech Stack
 
