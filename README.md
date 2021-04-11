@@ -1,14 +1,12 @@
-# LMS APP 
+# Learning Management System - Project 
 
 ### Tech Stack
 
 - React.js (create-react-app)
 - Bootstrap (reactstrap)
-- Redux 
 - react-redux-firebase
 - react-redux
 - redux-firestore
-- redux-thunk
 - Firebase 
   
 ### How to run it locally
