@@ -72,3 +72,24 @@ export const addMarks = (assignment, submission, marks) => {
             })
     }
 } 
+
+export const addNewSubmission = (assignment, student, url, srn) => {
+    return (dispatch, getState, {getFirebase}) => {
+        const firebase = getFirebase();
+        const firestore = getFirebase().firestore();
+
+        firestore
+            .collection('assignments')
+            .doc(assignment.id)
+            .update({
+                submissions: firebase.firestore.FieldValue.arrayUnion({
+                    srn: srn,
+                    name: student,
+                    url: url
+                })
+            })
+            .catch((err)=> {
+                console.log(err)
+            })
+    }
+}

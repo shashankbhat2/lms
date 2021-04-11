@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
-import { Button, CardBody, CardTitle, Col, Card} from 'reactstrap'
+import {Col} from 'reactstrap'
 import { compose } from 'redux'
 import CustomModal from '../Modal'
 import SubmissionsTable from '../Table/SubmissionsTable'
 import { removeAssignment } from '../../Store/actions/assignmentActions'
+import AssignmentCard from '../Cards/AssignmentCard'
+import UploadAssignment from '../Forms/UploadAssignment'
+import ViewSubmissionContainer from './ViewSubmissionContainer'
 
 const AssignmentContainer = ({teacher, removeAssignment, assignments,branch, sortedByBranch, sortedByTeacher, profile}) => {
     const branchWise = teacher ?  sortedByTeacher : (branch === "All" ? assignments : sortedByBranch); 
     let sortedAssignments = branchWise;
 
     const [isSubmissionsOpen, setIsSubmissionsOpen] = useState(false);
+    const [isMySubmissionOpen, setMySubmissionOpen] = useState(false);
     const [isUploadOpen, setUploadOpen] = useState(false);
     const [selectedAssignment, setSelectedAssignment] = useState('')
 
@@ -24,61 +28,35 @@ const AssignmentContainer = ({teacher, removeAssignment, assignments,branch, sor
         setSelectedAssignment(a)
         setIsSubmissionsOpen(!isSubmissionsOpen);
     }
-    const uploadToggle = () => setUploadOpen(!isUploadOpen);
+    const uploadToggle = (a) => {   
+            setSelectedAssignment(a)
+            setUploadOpen(!isUploadOpen);
+    }
+    
+    const mySubmissionToggle = (a) => {
+        setSelectedAssignment(a)
+        setMySubmissionOpen(!isMySubmissionOpen)
+    }
 
 
 
     return(
-        <>
-        {sortedAssignments && sortedAssignments.map((a) => (
-        <Col md="5" className="mb-3" key={a.id}>
-            <Card className="a-card">
-                <CardBody>
-                    <CardTitle className="a-title mb-4">
-                    <span className="m-2">{a.question}</span> 
-                    <p className="a-subtitle">{a.teacher}</p>
-                    <p className="a-subtitle">{a.course}</p>
-                    <p className="a-subtitle">{a.branch}</p>
-                    </CardTitle>
-                    <Button className="a-btn" color="primary">
-                        <a href={a.questionUrl} className="link">
-                        View 
-                        </a>
-                    </Button>
-                    {profile.userType === "Student" ? undefined : 
-                        <Button className="ml-3 edit a-btn" onClick={() => handleAssignmentRemove(a)}>
-                            Remove
-                        </Button>
-                    }
-                    {profile.userType === "Student" ? undefined : 
-                        <Button className="ml-3 a-btn view" onClick={() => submissionsToggle(a)}>
-                            View Submissions
-                        </Button>
-                    }
-                    {profile.userType === "Student" ? 
-                        <Button className="ml-3 a-btn view" onClick={uploadToggle}>
-                            Upload Submission
-                        </Button>
-                        :
-                        undefined
-                    }
-                    {profile.userType === "Student" ? 
-                        <Button className="ml-3 a-btn view" onClick={uploadToggle}>
-                            View My Submission
-                        </Button>
-                        :
-                        undefined
-                    }
-                </CardBody>
-            </Card>
+        <React.Fragment>
+        {sortedAssignments && sortedAssignments.map((assignment) => (
+        <Col md="5" className="mb-3" key={assignment.id}>
+            <AssignmentCard assignment={assignment} profile={profile} uploadToggle={uploadToggle} submissionsToggle={submissionsToggle} mySubmissionToggle={mySubmissionToggle} handleAssignmentRemove={handleAssignmentRemove}></AssignmentCard>
         </Col>
         ))}
             <CustomModal modal={isSubmissionsOpen} toggle={submissionsToggle} title="All Submissions">
                     <SubmissionsTable assignment={selectedAssignment}></SubmissionsTable>
             </CustomModal>
-            <CustomModal modal={isUploadOpen} toggle={uploadToggle} title="Add Your Submission">
+            <CustomModal modal={isUploadOpen} toggle={uploadToggle} title="View My Submission">
+                    <UploadAssignment assignment={selectedAssignment} profile={profile}></UploadAssignment>
             </CustomModal>
-       </>
+            <CustomModal modal={isMySubmissionOpen} toggle={mySubmissionToggle} title="View My Submission">
+                    <ViewSubmissionContainer assignment={selectedAssignment} profile={profile}></ViewSubmissionContainer>
+            </CustomModal>
+       </React.Fragment>
     )
 }
 

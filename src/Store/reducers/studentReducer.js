@@ -5,7 +5,7 @@ const initialState = {
 }
 
 
-const studentReducer = (state=initialState, action) => {
+const studentReducer = (state= initialState, action) => {
     switch(action.type){
         case 'SUSPEND_STUDENT_SUCESSS': {
             return {

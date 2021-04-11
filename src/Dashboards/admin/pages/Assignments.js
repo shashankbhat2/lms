@@ -8,9 +8,11 @@ import AssignmentContainer from '../../../Components/Containers/AssignmentContai
 import AddAssignmentForm from '../../../Components/Forms/AddAssignmentForm'
 
 
-const Assignments = ({branches}) => {
+const Assignments = ({branches, profile}) => {
     const [selectedBranch, setSelectedBranch] = useState('All');
     const [isOpen, setIsOpen] = useState(false)
+
+    const student = profile.userType  === 'Student' ? profile : false;
 
     const toggle = () => setIsOpen(!isOpen);
 
@@ -39,7 +41,7 @@ const Assignments = ({branches}) => {
                     </Input>
                 </Col>
                 <Col>
-                    <Button onClick={toggle} color="primary">Add Assignment</Button>
+                  {student ? undefined : <Button onClick={toggle} color="primary">Add Assignment</Button>}
                 </Col>
             </Row>
         </Row>
@@ -56,7 +58,8 @@ const Assignments = ({branches}) => {
 
 const mapStateToProps = (state) => {
     return{
-        branches: state.firestore.ordered.branches
+        branches: state.firestore.ordered.branches,
+        profile: state.firebase.profile
     }
 }
 

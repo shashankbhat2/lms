@@ -13,7 +13,8 @@ import CustomModal from '../Modal'
 const dummy = {
     title: 'Test Course',
     branch: 'CSE',
-    teacher: 'John Doe'
+    teacher: 'John Doe',
+    courseId: ''
 }
 
 
@@ -33,9 +34,9 @@ const CourseContainer = ({course}) => {
         <Col>
         <Row>
             <Col md="4">
-                <h5 className="course-title">Course Title: <span className="c-title">{currentCourse.title}</span></h5>
-                <h5 className="course-title">Branch: <span className="c-title">{currentCourse.branch}</span></h5>
-                <h5 className="course-title">Course Id: <span className="c-title">{currentCourse.courseId}</span></h5>
+                <h5 className="course-title">Course Title: <span className="c-title">{currentCourse.title || dummy.title}</span></h5>
+                <h5 className="course-title">Branch: <span className="c-title">{currentCourse.branch || dummy.branch}</span></h5>
+                <h5 className="course-title">Course Id: <span className="c-title">{currentCourse.courseId || dummy.courseId}</span></h5>
                 <Button onClick={videoFormToggle} className="button navy">Add Video</Button>
                 <Button onClick={resourceFormToggle} className="button mt-2" color="primary">Add Resource</Button>
             </Col>

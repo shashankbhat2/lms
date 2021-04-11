@@ -6,28 +6,8 @@ import { compose } from 'redux';
 import Notification from '../../../Components/Notification';
 import Slider from '../../../Components/Slider';
 
-const  notifications = [
-    {
-        id:1,
-        title: 'ESA Schedule',
-        desc: 'ESA for Btech & Mtech scheduled from May 10th - 25th'
-    },
-    {
-        id:2,
-        title: 'Hacktomorrow',
-        desc: 'CSE Dept. Presents Hacktomorrow'
-    },
-    {
-        id:3,
-        title: 'CultFest2021',
-        desc: 'Inter Dept. Cultural festival'
-    },
 
-]
-
-
-const TeacherOverview = ({profile, classes}) => {
-    const myClasses = classes || []
+const TeacherOverview = ({profile, classes, notifications}) => {
     return(
         <Container className="mt-4 mb-4">
         <Row>
@@ -43,7 +23,7 @@ const TeacherOverview = ({profile, classes}) => {
             <Card className="welcome-card mt-4">
                 <h5>Your Classes</h5>
                 <Row>
-                {myClasses && myClasses.map((c) => (
+                {classes && classes.map((c) => (
                             <Col md='4'>
                                 <Card className="class-card mt-2 mb-2"> 
                                     <CardTitle className="class-course">{c.course}</CardTitle>
@@ -72,7 +52,8 @@ const mapStateToProps = (state) => {
     console.log(state)
     return {
         profile: state.firebase.profile, 
-        classes: state.firestore.ordered.classes || []
+        classes: state.firestore.ordered.classes || [],
+        notifications: state.firestore.ordered.notifications || []
     }
 }
 
@@ -80,5 +61,8 @@ export default compose(connect(mapStateToProps), firestoreConnect((props) => [
     {
         collection: 'classes',
         where: ["teacher", "==", `${props.profile.name}`]
+    },
+    {
+        collection: 'notifications',
     }
 ]))(TeacherOverview);

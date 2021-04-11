@@ -45,4 +45,21 @@ export const TEACHER_ROUTES = [
     }
 ];
 
-export const STUDENT_ROUTES = [];
+export const STUDENT_ROUTES = [
+    {
+        'route': 'Home',
+        'url':'/'
+    },
+    {
+        'route': 'Courses',
+        'url': '/courses'
+    },
+    {
+        'route': 'Assignments',
+        'url': '/assignments'
+    },
+    {
+        'route': 'Forum',
+        'url': '/forum'
+    },
+];

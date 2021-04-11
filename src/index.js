@@ -16,7 +16,6 @@ import { useSelector } from 'react-redux';
 import { isLoaded } from 'react-redux-firebase';
 
 
-
 const store = createStore(
   rootReducer,
   compose(
@@ -67,3 +66,4 @@ ReactDOM.render(
   </Provider>,
 document.getElementById('root')
 );
+

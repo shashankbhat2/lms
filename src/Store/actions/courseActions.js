@@ -150,7 +150,7 @@ export const removeResource = (course, title, url) => {
                 })
             })
             .then(() => {
-                var deleteTask = storage.ref().child(`courseVideos/${title}`)
+                var deleteTask = storage.ref().child(`courseResources/${title}`)
                 deleteTask.delete().then(() => {
                     console.log('Deleted File')
                 }).catch((err) => {

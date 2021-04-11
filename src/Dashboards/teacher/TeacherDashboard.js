@@ -8,6 +8,8 @@ import CustomAlert from '../../Components/Alert';
 import Courses from '../admin/pages/Courses';
 import Course from '../admin/pages/Course';
 import MyAssignments from './pages/MyAssignments';
+import MyClasses from './pages/MyClasses';
+import StudentForum from '../forum/StudentForum';
 
 
 
@@ -24,6 +26,8 @@ const TeacherDashboard = ({profile, auth, authSuccess}) => {
                     <Route exact path="/courses" component={Courses}></Route>
                     <Route exact path="/courses/:course" component={Course}></Route>
                     <Route exact path="/myassignments" component={MyAssignments}></Route>
+                    <Route exact path="/myclasses" component={MyClasses}></Route>
+                    <Route exact path="/forum" component={StudentForum}></Route>
             </Switch>
             <Footer></Footer>
         </div>

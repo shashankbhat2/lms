@@ -115,7 +115,7 @@ const InfoContainer = ({student,setStudentSuspended, updateStudentDisplayPic}) =
                     </Row>
                     <Row md="6">
                     <Col md='4'>
-                        <p className="info-label">Entrance Exam Rank: <span className="s-name">{currentStudent.ent || ''}</span></p>
+                        <p className="info-label">Entrance Exam Rank: <span className="s-name">{currentStudent.rank || ''}</span></p>
                     </Col>
                     </Row>
                 </Card>

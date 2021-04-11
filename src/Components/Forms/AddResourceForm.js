@@ -41,7 +41,7 @@ const AddResourceForm = ({course, addResource}) => {
             </Row>
             <Row md="12" className="mt-3">
                 <Col md="4">
-                    <Label htmlFor="name">Video File</Label>
+                    <Label htmlFor="name">Resource File</Label>
                     <Input type="file" onChange={handleFile} id="pdfUpload"></Input>
                     <UncontrolledTooltip placement='right' target="pdfUpload">
                         PDF Files only

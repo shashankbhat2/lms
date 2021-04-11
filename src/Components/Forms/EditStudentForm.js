@@ -59,7 +59,7 @@ const EditStudentForm = ({student, updateStudentInfo, edited}) => {
                 </Col>
                 <Col md="5">
                     <Label htmlFor="dob">DOB</Label>
-                    <Input type="text" id="dob" value={inputs.dob} onChange={handleInputChange}></Input>
+                    <Input type="date" id="dob" value={inputs.dob} onChange={handleInputChange}></Input>
                 </Col>
             </Row>
             <Row md="12" className='mt-4 mb-4'>
@@ -80,6 +80,10 @@ const EditStudentForm = ({student, updateStudentInfo, edited}) => {
                 <Col md="5">
                     <Label htmlFor="puc">PUC</Label>
                     <Input type="text" id="puc" value={inputs.puc} onChange={handleInputChange}></Input>
+                </Col>
+                <Col md="5" className="mt-2">
+                    <Label htmlFor="rank">Entrance Exam Rank</Label>
+                    <Input type="text" id="rank" value={inputs.rank} onChange={handleInputChange}></Input>
                 </Col>
             </Row>
             <Row>

@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
+import AddNotificationForm from '../Forms/AddNotificationForm';
+import CustomModal from '../Modal/index'
 
-const Notification = ({notifications, profile}) => {
+const Notification = ({notifications, profile}) => { 
+   
+    const [formOpen, setFormOpen] = useState(false);
+    
+    const formToggle = () => setFormOpen(!formOpen);
 
     return(
         <div className="mt-4 mb-4">
@@ -9,7 +15,7 @@ const Notification = ({notifications, profile}) => {
         <ListGroupItem className="notif-heading">
             <ListGroupItemHeading>Notifications</ListGroupItemHeading>
         </ListGroupItem>
-        {notifications.map((i) => ( 
+        {notifications ? notifications.map((i) => ( 
         <ListGroupItem key={i.id}>
          <ListGroupItemHeading>{i.title}</ListGroupItemHeading>
          <ListGroupItemText>
@@ -17,15 +23,18 @@ const Notification = ({notifications, profile}) => {
          </ListGroupItemText>
         </ListGroupItem>
         ))
-        }
+        : <p className="m-auto">Loading Notifications</p>}
         {
             profile.userType === "Admin" ? 
             <ListGroupItem>
-                <Button color="primary" className="add-notif">Add a Notification</Button>
+                <Button color="primary" className="add-notif" onClick={formToggle}>Add a Notification</Button>
             </ListGroupItem>
             : 
             undefined
         }
+        <CustomModal title="Add New Notification" modal={formOpen} toggle={formToggle}>
+            <AddNotificationForm></AddNotificationForm>
+        </CustomModal>
         </ListGroup>  
         </div>
     )

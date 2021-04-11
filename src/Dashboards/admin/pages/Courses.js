@@ -42,7 +42,7 @@ const Courses = ({branches, profile}) => {
                         </Input>
                     </Col>
                     <Col md="6">
-                            <Button color='primary' className="mt-auto w-auto" onClick={toggle}>Add New Course</Button>
+                         {admin ? <Button color='primary' className="mt-auto w-auto" onClick={toggle}>Add New Course</Button> : undefined}
                     </Col>
                 </Row>
             </Row>
