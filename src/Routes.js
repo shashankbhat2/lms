@@ -18,6 +18,10 @@ export const ADMIN_ROUTES = [
     {
         'route': 'Teachers',
         'url': '/teachers'
+    },
+    {
+        'route': 'Admins',
+        'url': '/admins'
     }
 ]
 

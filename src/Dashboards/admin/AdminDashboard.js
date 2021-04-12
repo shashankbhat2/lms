@@ -10,6 +10,7 @@ import Courses from './pages/Courses';
 import Course from './pages/Course';
 import Teachers from './pages/Teachers';
 import Assignments from './pages/Assignments';
+import Admins from './pages/Admins';
 
 
 
@@ -31,7 +32,7 @@ const AdminDashboard = ({auth, upload, authSuccess}) => {
                     <Route exact path="/courses" component={Courses}></Route>
                     <Route exact path="/courses/:course" component={Course}></Route>
                     <Route exact path="/assignments" component={Assignments}></Route>
-                    <Route exact path="/assignments/:assignment"></Route>
+                    <Route exact path="/admins" component={Admins}></Route>
             </Switch>
             <Footer></Footer>
         </div>
