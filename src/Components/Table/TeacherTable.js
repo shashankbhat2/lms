@@ -3,11 +3,7 @@ import { firestoreConnect } from 'react-redux-firebase'
 import {connect} from 'react-redux'
 import { compose } from 'redux'
 import {Table} from 'reactstrap'
-
-
-
-
-
+import { NavLink } from 'react-router-dom'
 
 
 const TeacherTable = ({teachers, sortedByBranch, branch}) => {
@@ -32,7 +28,9 @@ const TeacherTable = ({teachers, sortedByBranch, branch}) => {
         {teacherData && teacherData.map((teacher)=> (
             <tr key={teacher.SRN}>
             <td>
-            {teacher.name}
+                <NavLink to={`/teachers/${teacher.name}`}>
+                    {teacher.name}
+                </NavLink>
             </td>
             <td>{teacher.Branch}</td>
             <td>{teacher.SRN}</td>

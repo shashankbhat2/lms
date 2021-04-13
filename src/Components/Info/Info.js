@@ -72,6 +72,9 @@ const InfoContainer = ({student,setStudentSuspended, updateStudentDisplayPic}) =
                         <Col md="4">
                             <p className="info-label">SRN: <span className="s-name">{currentStudent.SRN}</span></p>
                         </Col>
+                        <Col md='3'>
+                            <p className="info-label">Gender: <span className="s-name">{currentStudent.gender}</span></p>
+                        </Col>
                     </Row>
                     <Row md="6">
                         <Col md='4'>

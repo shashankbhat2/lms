@@ -3,31 +3,30 @@ import { connect } from 'react-redux'
 import { Button, Col, Container, Form, Input, Label, Row } from 'reactstrap'
 import { compose } from 'redux'
 import useForm from '../../Hooks/useForm'
-import { updateStudentInfo } from '../../Store/actions/studentActions'
-import CustomAlert from '../Alert'
+import { updateTeacherInfo } from '../../Store/actions/teacherActions'
 
-const EditStudentForm = ({student, updateStudentInfo, edited}) => {
+const EditTeacherForm = ({teacher, updateTeacherInfo}) => {
 
-    const updateStudent = () => {
-       updateStudentInfo(inputs)
+    const updateTeacher = () => {
+        updateTeacherInfo(inputs)
     }    
     
     const {inputs, handleInputChange, handleSubmit} = useForm({
-          id:student.id, 
-          name: student.name, 
-          email: student.email, 
-          father: student.father, 
-          mother: student.mother, 
-          srn:student.SRN, 
-          dob:student.dob, 
-          gender: student.gender,
-          sslc:student.sslc, 
-          puc: student.puc, 
-          rank:student.rank, 
-          address: student.address,
-          branch: student.Branch,
-          semester: student.semester,
-    }, updateStudent);
+          id:teacher.id, 
+          name: teacher.name, 
+          email: teacher.email, 
+          father: teacher.father, 
+          mother: teacher.mother, 
+          srn:teacher.SRN, 
+          gender: teacher.gender,
+          dob:teacher.dob, 
+          sslc:teacher.sslc, 
+          puc: teacher.puc, 
+          bachelor: teacher.bachelor,
+          master: teacher.master,
+          address: teacher.address,
+          branch: teacher.Branch
+    }, updateTeacher);
 
 
     return(
@@ -42,21 +41,16 @@ const EditStudentForm = ({student, updateStudentInfo, edited}) => {
                     <Label htmlFor="srn">SRN</Label>
                     <Input type="text" id="srn" value={inputs.srn} onChange={handleInputChange} disabled></Input>
                 </Col>
+
             </Row>
             <Row md="12" className='mt-4 mb-4'>
                 <Col md="5">
-                    <Label htmlFor="srn">Gender</Label>
-                    <Input type="text" id="srn" value={inputs.gender} onChange={handleInputChange} disabled></Input>
+                    <Label htmlFor="gender">Gender</Label>
+                    <Input type="text" id="gender" value={inputs.gender} onChange={handleInputChange} disabled></Input>
                 </Col>
-            </Row>
-            <Row md="12" className='mt-4 mb-4'>
                 <Col md="5">
                     <Label htmlFor="branch">Branch</Label>
                     <Input type="text" id="branch" value={inputs.branch} onChange={handleInputChange}></Input>
-                </Col>
-                <Col md="5">
-                    <Label htmlFor="semester">Semester</Label>
-                    <Input type="text" id="semester" value={inputs.semester} onChange={handleInputChange}></Input>
                 </Col>
             </Row>
             <Row md="12" className='mt-4 mb-4'>
@@ -88,9 +82,13 @@ const EditStudentForm = ({student, updateStudentInfo, edited}) => {
                     <Label htmlFor="puc">PUC</Label>
                     <Input type="text" id="puc" value={inputs.puc} onChange={handleInputChange}></Input>
                 </Col>
+                <Col md="5">
+                    <Label htmlFor="bachelor">Bachelor's Degree</Label>
+                    <Input type="text" id="bachelor" value={inputs.bachelor} onChange={handleInputChange}></Input>
+                </Col>
                 <Col md="5" className="mt-2">
-                    <Label htmlFor="rank">Entrance Exam Rank</Label>
-                    <Input type="text" id="rank" value={inputs.rank} onChange={handleInputChange}></Input>
+                    <Label htmlFor="master">Master's Degree</Label>
+                    <Input type="text" id="master" value={inputs.master} onChange={handleInputChange}></Input>
                 </Col>
             </Row>
             <Row>
@@ -99,8 +97,7 @@ const EditStudentForm = ({student, updateStudentInfo, edited}) => {
                     <Input type="textarea" id="address" value={inputs.address} onChange={handleInputChange}></Input>
                 </Col>
             </Row>
-            <Button type="submit" className="mt-3 mb-3" color="primary">Edit Student</Button>
-            {edited && <CustomAlert alert={edited}></CustomAlert>}
+            <Button type="submit" className="mt-3 mb-3" color="primary">Edit Teacher</Button>
             </Container>
         </Form>
     )
@@ -117,12 +114,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return({
-        updateStudentInfo: (student) => {
-            dispatch(updateStudentInfo(student))
+        updateTeacherInfo: (teacher) => {
+            dispatch(updateTeacherInfo(teacher))
         }
     })
 }
 
-export default compose(connect(mapStateToProps, mapDispatchToProps))(EditStudentForm);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(EditTeacherForm);
 
 

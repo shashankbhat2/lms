@@ -14,6 +14,7 @@ export const addNewAssignment = (assignment) => {
                     teacher: assignment.teacher,
                     course: assignment.course, 
                     questionUrl: assignment.url,
+                    lastDate: assignment.lastDate,
                     submissions: []
                 }).catch((err)=> {
                 console.log(err)

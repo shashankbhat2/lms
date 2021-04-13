@@ -43,6 +43,7 @@ export const signUp = (newUser) => {
           userType: newUser.type, 
           phone: newUser.phone,
           email: newUser.email,
+          gender: newUser.gender,
           semester: newUser.semester
         });
       }).then(() => {

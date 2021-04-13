@@ -19,7 +19,7 @@ const MyAssignments = ({profile}) => {
     return(
         <Container className="mt-4 mb-4">
         <h1 className="table-title mt-3 mb-3">My Assignments</h1>
-        <Row className='m-0'>
+        <Row className='mb-3 m-0 mt-3'>
             <Row md='12'>
                 <Col>
                     <Button onClick={toggle} color="primary">Add Assignment</Button>

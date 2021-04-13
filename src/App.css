@@ -410,3 +410,98 @@ body{
   font-weight: 550 !important;
   font-size: 12px !important;
 }
+
+.empty-div{
+  border-radius: 10px;
+  border: 0.1px solid #dae4ee;
+  padding: 100px;
+  width: 100%;
+}
+.center-text{
+  text-align: center;
+}
+
+
+.signup-box{
+  height: 95vh;
+  position:relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image:  linear-gradient(0deg, rgba(3, 0, 159, 0.6), rgba(3, 0, 159, 0.6)),url('./Assets/background.png');
+}
+
+.error{
+  color: orangered;
+  margin: 8px 0px;
+  font-weight: 550 !important;
+  font-size: 16px !important;
+}
+
+.logo-container{
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  z-index: 0;
+  background-color: #2D9CDB;
+  position: absolute;
+  top: 40%;
+  text-align: center;
+}
+
+.logo{
+  margin-top: 10px;
+}
+
+.signup-container{
+  font-family: 'Source Sans Pro' !important;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 50px;
+}
+
+.signup-button{
+  margin: 10px 0px;
+  font-weight: 600 !important;
+  width: 20%;
+}
+
+.logo-mobile{
+  display: none;
+}
+
+.login-button{
+  width: 20%;
+}
+
+.heading{
+  font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #03009F;
+  font-style: normal;
+  font-weight: bold;
+}
+
+.login-helper{
+  margin: 10px 0px;
+  font-size: 16px;
+  font-weight: 500 !important;
+}
+
+.login-helper  > a {
+  cursor: pointer;
+  color:#2D9CDB !important;
+  font-weight: 600;
+}
+
+
+
+@media (max-width: 767px) {    
+  .signup-box{
+      height: auto;
+      display: flex;
+      background: none;
+  }
+  .signup-container{
+      margin-top: 150px;
+      margin-bottom: 50px;
+  }
+}

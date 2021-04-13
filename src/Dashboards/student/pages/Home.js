@@ -62,7 +62,7 @@ const mapStateToProps = (state) => {
 export default compose(connect(mapStateToProps), firestoreConnect((props) => [
     {
         collection: 'classes',
-        where: ["branch", "==", `${props.profile.branch}`]
+        where: ["branch", "==", `${props.profile.Branch}`]
     },
     {
         collection: 'notifications',

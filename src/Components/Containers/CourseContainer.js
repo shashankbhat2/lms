@@ -18,10 +18,10 @@ const dummy = {
 }
 
 
-const CourseContainer = ({course}) => {
+const CourseContainer = ({course, profile}) => {
 
     const currentCourse = course ? course[0] : dummy
-    
+    const isStudent = profile.userType === 'Student' ? true :  false;
 
 
     const [isVideoFormOpen, setIsVideoFormOpen] = useState(false);
@@ -37,24 +37,35 @@ const CourseContainer = ({course}) => {
                 <h5 className="course-title">Course Title: <span className="c-title">{currentCourse.title || dummy.title}</span></h5>
                 <h5 className="course-title">Branch: <span className="c-title">{currentCourse.branch || dummy.branch}</span></h5>
                 <h5 className="course-title">Course Id: <span className="c-title">{currentCourse.courseId || dummy.courseId}</span></h5>
-                <Button onClick={videoFormToggle} className="button navy">Add Video</Button>
-                <Button onClick={resourceFormToggle} className="button mt-2" color="primary">Add Resource</Button>
+                {isStudent ? ''  : <Button onClick={videoFormToggle} className="button navy">Add Video</Button>}
+                {isStudent ? ''  :<Button onClick={resourceFormToggle} className="button mt-2" color="primary">Add Resource</Button>}
             </Col>
         </Row>
         <Row className="mt-3 mb-3">
             <Col>
-                <div className="mt-5 mb-5">
+                <div className="mt-2 mb-3">
                     <h4 className="title">Course Videos</h4>
                 </div>
+                {currentCourse.videos ? 
+                <div className="w-100 mb-2 empty-div">
+                    <p className="center-text">No Videos yet!</p>
+                </div>
+                :
                 <VideoCard videos={currentCourse.videos} course={course}></VideoCard>
+                }
             </Col>
         </Row>
         <Row className="mt-3 mb-3">
             <Col>
-                <div className="mt-5 mb-5">
+                <div className="mt-2 mb-3">
                     <h4 className="title">Course Resources</h4>
                 </div>
-                <ResourceCard resources={currentCourse.references} course={course}></ResourceCard>
+                
+                {currentCourse.videos ? 
+                <div className="w-100 mb-2 empty-div">
+                    <p className="center-text">No Course Materials yet!</p>
+                </div>
+                : <ResourceCard resources={currentCourse.references} course={course}></ResourceCard>}
             </Col>
         </Row>
             <CustomModal modal={isVideoFormOpen} title="Add New Video" toggle={videoFormToggle}>
@@ -68,8 +79,8 @@ const CourseContainer = ({course}) => {
 }
 
 const mapStateToProps = (state) =>{
-    console.log(state)
     return{
+        profile: state.firebase.profile,
         course: state.firestore.ordered.course,
     }
 }

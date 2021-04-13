@@ -1,6 +1,6 @@
 import React from 'react'
 import {Row, Col, Container, Form, FormGroup, Label, Input, Button} from 'reactstrap'
-import './Auth.css'
+import '../App.css'
 import {Redirect} from 'react-router-dom'
 import {ReactComponent as Logo} from '../Assets/Logo.svg'
 import { Link } from 'react-router-dom'

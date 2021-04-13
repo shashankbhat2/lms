@@ -15,11 +15,16 @@ const ClassesContainer = ({classes,removeClass}) => {
 
     return(
         <React.Fragment>
-        {teacherClasses && teacherClasses.map((c) => (
+        {teacherClasses && teacherClasses.length !== 0 ? teacherClasses.map((c) => (
         <Col md="4" className="mb-3" key={c.id}>
             <ClassCard teacherClass={c} handleClassRemove={handleClassRemove}></ClassCard>
         </Col>
-        ))}
+        )) : (
+            <div className="w-100 mt-2 ml-3 mb-2 empty-div">
+                <p className="center-text">You have no Classes</p>
+            </div> 
+        )
+        }
         </React.Fragment>
     )
 }

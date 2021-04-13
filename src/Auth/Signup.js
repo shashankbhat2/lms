@@ -1,6 +1,6 @@
 import React from 'react'
 import {Row, Col, Container, Form, FormGroup, Label, Input, Button} from 'reactstrap'
-import './Auth.css'
+import '../App.css'
 import {ReactComponent as Logo} from '../Assets/Logo.svg'
 import { Link, Redirect } from 'react-router-dom'
 import {connect} from 'react-redux';
@@ -149,16 +149,36 @@ class Signup extends React.Component{
                         <Row>
                         <Col>
                             <FormGroup check>
-                            <Input id="radio1-option1" type="radio" name="type" value="Student" id="student" onChange={this.handleChange}/>
-                            <Label check for="radio1-option1">
+                            <Input type="radio" name="gender" value="male" id="male" onChange={this.handleChange}/>
+                            <Label check for="male">
+                                Male
+                            </Label>
+                            </FormGroup>
+                        </Col>
+                        <Col>
+                            <FormGroup check>
+                            <Input type="radio" name="gender" value="female" id="female" onChange={this.handleChange}/>
+                            <Label check for="female">
+                                Female
+                            </Label>
+                            </FormGroup>
+                        </Col>
+                        </Row>
+                    </Col>
+                    <Col md='5' className="mt-0 mb-0"> 
+                        <Row>
+                        <Col>
+                            <FormGroup check>
+                            <Input type="radio" name="type" value="Student" id="student" onChange={this.handleChange}/>
+                            <Label check for="student">
                                 Student
                             </Label>
                             </FormGroup>
                         </Col>
                         <Col>
                             <FormGroup check>
-                            <Input type="radio" name="type" id="radio1-option2" value="Teacher" id="teacher" onChange={this.handleChange}/>
-                            <Label check for="radio1-option2">
+                            <Input type="radio" name="type" value="Teacher" id="teacher" onChange={this.handleChange}/>
+                            <Label check for="teacher">
                                 Teacher
                             </Label>
                             </FormGroup>

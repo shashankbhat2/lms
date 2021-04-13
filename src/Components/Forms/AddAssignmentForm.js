@@ -16,7 +16,7 @@ const AddAssignmentForm = ({branches, teachers, addNewAssignment, courses, profi
     }
 
 
-    const { inputs, handleInputChange, handleSubmit} = useForm({question:'', branch: "All", url: '', course: "Web Technology" , teacher: teacher}, handleAssignment)
+    const { inputs, handleInputChange, handleSubmit} = useForm({question:'', branch: "All", url: '', course: "Web Technology" , teacher: teacher, lastDate: ''}, handleAssignment)
 
     return(
         <Form onSubmit={handleSubmit}>
@@ -54,6 +54,10 @@ const AddAssignmentForm = ({branches, teachers, addNewAssignment, courses, profi
                         <option key={teacher.id} value={teacher.name}>{teacher.name}</option>
                         ))}           
                     </Input>
+                </Row>
+                <Row className="mt-2">
+                    <Label htmlFor="lastDate">Submission Last Date</Label>
+                    <Input type="date" id="lastDate" value={inputs.lastDate} onChange={handleInputChange}></Input>
                 </Row>
             </Col>
             <Button color="primary" type="submit" className="mt-4">

@@ -1,5 +1,6 @@
 const functions = require("firebase-functions");
 const admin =  require('firebase-admin');
+const cors = require('cors')({origin: true})
 admin.initializeApp(functions.config().firebase)
 
 const createNotification = ((notification) => {
@@ -20,22 +21,31 @@ exports.newNotificationAdded = functions
 )
 
 
-exports.addAdminRole = functions.https.onCall((data, context) => {
-    // check request is made by an admin
-    if ( context.auth.token.admin !== true ) {
-      return { error: 'Only admins can add other admins' }
-    }
-    // get user and add admin custom claim
-    return admin.auth().getUserByEmail(data.email).then(user => {
-      return admin.auth().setCustomUserClaims(user.uid, {
-        admin: true
-      })
-    }).then(() => {
-      return {
-        message: `Success! ${data.email} has been made an admin.`
-      }
-    }).catch(err => {
-      return err;
-    });
-  });
+exports.addAdmin = functions.https.onRequest(async (req, res) => {
+  cors(req, res, async() => {
+      try {
+        const newAdmin = {
+            email: req.body.email,
+            password: req.body.password,
+        }
+
+        const adminRecord = await admin
+            .auth()
+            .createUser(newAdmin);
+
+        const userId = adminRecord.uid;
+
+        await admin.firestore().collection("users").doc(userId).set({
+          email: req.body.email,
+          name: req.body.name,
+          userType: 'Admin',
+          password: req.body.password,
+          phone: req.body.phone,
+        });
   
+        return { result: 'The new admin has been successfully created.' };
+    } catch (error) {
+      console.log(error)
+    }
+  })
+})

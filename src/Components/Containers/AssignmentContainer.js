@@ -42,11 +42,16 @@ const AssignmentContainer = ({teacher, removeAssignment, assignments,branch, sor
 
     return(
         <React.Fragment>
-        {sortedAssignments && sortedAssignments.map((assignment) => (
+        {sortedAssignments && sortedAssignments.length !== 0 ? sortedAssignments.map((assignment) => (
         <Col md="5" className="mb-3" key={assignment.id}>
             <AssignmentCard assignment={assignment} profile={profile} uploadToggle={uploadToggle} submissionsToggle={submissionsToggle} mySubmissionToggle={mySubmissionToggle} handleAssignmentRemove={handleAssignmentRemove}></AssignmentCard>
         </Col>
-        ))}
+        )) : (
+            <div className="w-100 mt-2 ml-3 mb-2 empty-div">
+                <p className="center-text">You have created 0 Assignments</p>
+            </div> 
+        
+        )}
             <CustomModal modal={isSubmissionsOpen} toggle={submissionsToggle} title="All Submissions">
                     <SubmissionsTable assignment={selectedAssignment}></SubmissionsTable>
             </CustomModal>
